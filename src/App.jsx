@@ -8,7 +8,7 @@ const App = () => {
     <div className='font-family-outfit'>
       <ToastContainer />
       <Navbar />
-      <main>
+      <main className='min-h-screen'>
         <ScrollToTop />
         <Outlet />
       </main>
