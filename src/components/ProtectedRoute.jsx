@@ -32,8 +32,8 @@ const ProtectedDocRoute = ({ children }) => {
     ? 
     children 
     : 
-    <div className='text-slate-700 text-center my-20 p-2 bg-slate-200 mx-4 text-sm md:text-lg font-medium'>You can't access this website, if you're already logged in, please logout and 
-    <span className='text-blue-700 cursor-pointer' onClick={() => navigate("/login")}> Re-login </span>
+    <div className='text-slate-700 text-center my-20 p-2 bg-slate-200 mx-4 text-sm md:text-lg font-medium'>If you can't access this website, please 
+    <span className='text-blue-700 cursor-pointer' onClick={() => navigate("/login")}> Login </span>
      with Admin Credentials</div>
   )
 };
