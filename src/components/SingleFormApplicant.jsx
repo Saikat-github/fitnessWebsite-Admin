@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Mail, MessageCircle, ChevronDown, ChevronUp, Phone } from "lucide-react";
+import { Mail, MessageCircle, ChevronDown, ChevronUp, Phone, Clock } from "lucide-react";
 import { converDate, getStartEndDate } from "../utils/ConverDate";
 import dbService from "../appwrite/data";
 import { toast } from "react-toastify";
@@ -9,17 +9,17 @@ import { AppContext } from "../context/AppContext";
 
 const SingleFormApplicant = ({ applicant, filter }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const {startDate, endDate} = getStartEndDate(filter)
-  const {getForms} = useContext(AppContext);
+  const { startDate, endDate } = getStartEndDate(filter)
+  const { getForms } = useContext(AppContext);
 
-  const sendWhatsAppMessage = async ({$id, messageCount, name, phoneNo}) => {
+  const sendWhatsAppMessage = async ({ $id, messageCount, name, phoneNo }) => {
     try {
       const whatsappUrl = `https://wa.me/${phoneNo}?text=Hello%20${encodeURIComponent(
         name
       )},%20regarding%20your%20fitness%20plan...`;
       window.open(whatsappUrl, "_blank");
       await dbService.updateForm({ id: $id, messageCount: messageCount + 1 })
-      await getForms({startDate, endDate})
+      await getForms({ startDate, endDate })
     } catch (error) {
       console.log(error);
       toast.error("Error opening whatsApp")
@@ -31,7 +31,7 @@ const SingleFormApplicant = ({ applicant, filter }) => {
       const mailtoUrl = `mailto:${email}?subject=Fitness Plan Inquiry&body=Hello ${encodeURIComponent(name)}, I wanted to discuss your chosen plan...`;
       window.location.href = mailtoUrl;
       await dbService.updateForm({ id: $id, emailCount: emailCount + 1 });
-      await getForms({startDate, endDate})
+      await getForms({ startDate, endDate })
     } catch (error) {
       console.log(error);
       toast.error("Error opening email")
@@ -51,10 +51,8 @@ const SingleFormApplicant = ({ applicant, filter }) => {
             </a>
           </p>
           <p className="text-slate-700 text-sm flex items-center gap-1">
-            <Mail size={16} className="text-slate-500" />
-            <a href={`mailto:${applicant.email}`} className="text-blue-500 hover:underline">
-              {applicant.email}
-            </a>
+          <Clock size={16} className="text-slate-500" />
+            {converDate(applicant.$createdAt)}
           </p>
 
           <button
@@ -65,7 +63,8 @@ const SingleFormApplicant = ({ applicant, filter }) => {
           </button>
           {/* Expanded View */}
           {isExpanded && (
-            <div className="mt-3 p-3 transition-all text-sm space-y-2">
+            <div className="p-3 transition-all text-sm space-y-2">
+              <p><span className="font-medium text-slate-900">Email:</span> {applicant.email}</p>
               <p><span className="font-medium text-slate-900">Goal:</span> {applicant.applicantGoal}</p>
               <p><span className="font-medium text-slate-900">Gender:</span> {applicant.applicantGender}</p>
               <p><span className="font-medium text-slate-900">Agreed to Continue:</span> {applicant.agreedToContinue ? "Yes" : "No"}</p>
@@ -74,7 +73,6 @@ const SingleFormApplicant = ({ applicant, filter }) => {
               <p><span className="font-medium text-slate-900">Height:</span> {applicant.height} cm</p>
               <p><span className="font-medium text-slate-900">Plan Chosen:</span> {applicant.planChoosen}</p>
               <p><span className="font-medium text-slate-900">Gym Name:</span> {applicant.gymName}</p>
-              <p><span className="font-medium text-slate-900">Submission Date:</span> {converDate(applicant.$createdAt)}</p>
             </div>
           )}
         </div>

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, useMemo } from "react";
 import { Search, MessageCircle, CheckCircle, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { AppContext } from "../context/AppContext";
-import { converToJustDate, getStartEndDate } from "../utils/ConverDate";
+import { converDate, converToJustDate, getStartEndDate } from "../utils/ConverDate";
 import dbService from "../appwrite/data";
 import { toast } from "react-toastify";
 import conf from "../conf/conf";
@@ -134,6 +134,7 @@ const SessionCard = ({ session, onSendMessage, onDelete, loading }) => (
         <a href={`tel:${session.phoneNo}`} className="text-blue-500 hover:underline"> {session.phoneNo}</a>
       </p>
       <p><span className="font-medium text-slate-900">Preferred Date & Time:</span> {converToJustDate(session.preferredTime)}</p>
+      <p><span className="font-medium text-slate-900">Submission Time:</span> {converDate(session.$createdAt)}</p>
     </div>
     <div className="flex flex-col items-center gap-4 mt-3 text-xs">
       <div className="flex gap-2">
