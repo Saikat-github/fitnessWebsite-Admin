@@ -1,6 +1,6 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
-import { Navbar, ScrollToTop } from './components'
+import { Footer, Navbar, ScrollToTop } from './components'
 import { Outlet } from 'react-router-dom'
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
         <ScrollToTop />
         <Outlet />
       </main>
+      <Footer />
     </div>
   )
 }
