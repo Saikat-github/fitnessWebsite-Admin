@@ -28,7 +28,7 @@ const SingleFormApplicant = ({ applicant, filter }) => {
 
   const sendEmail = async ({ $id, emailCount, email, name }) => {
     try {
-      const mailtoUrl = `mailto:${email}?subject=Fitness Plan Inquiry&body=Hello ${encodeURIComponent(name)}, I wanted to discuss your chosen plan...`;
+      const mailtoUrl = `mailto:${email}?subject=Fitness Plan Inquiry&body=Hello ${name}, I wanted to discuss your chosen plan...`;
       window.location.href = mailtoUrl;
       await dbService.updateForm({ id: $id, emailCount: emailCount + 1 });
       await getForms({ startDate, endDate })
