@@ -7,11 +7,12 @@ import { toast } from "react-toastify";
 import conf from "../conf/conf";
 
 const FreeSession = () => {
+  const { sessions, getSessions, dateFilter, setDateFilter } = useContext(AppContext);
+
   const [loader, setLoader] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState("thisMonth");
-  const { sessions, getSessions, setDateFilter } = useContext(AppContext);
+  const [filter, setFilter] = useState(dateFilter);
   const limit = conf.appwriteQueryLimit;
 
   useEffect(() => {

@@ -43,9 +43,9 @@ const Navbar = () => {
                 &&
                 <ul className="hidden md:flex space-x-6 items-center">
                   <NavItem to="/" icon={<Home size={20} />} label="Home" />
-                  <NavItem to="/all-users" icon={<Users size={20} />} label="All Users" />
                   <NavItem to="/submitted-forms" icon={<FileText size={20} />} label="Form Submitted" />
                   <NavItem to="/free-sessions" icon={<CalendarCheck size={20} />} label="Free Session" />
+                  <NavItem to="/all-users" icon={<Users size={20} />} label="All Users" />
                 </ul>
               }
               <Logout className={"hidden md:flex"} setIsOpen={setIsOpen} />

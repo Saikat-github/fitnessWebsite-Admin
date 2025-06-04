@@ -84,7 +84,7 @@ export const AppProvider = ({ children }) => {
 
   /*** Fetch all required data in parallel ***/
   useEffect(() => {
-    const {startDate, endDate} = getStartEndDate("thisMonth");
+    const {startDate, endDate} = getStartEndDate(dateFilter);
     const fetchData = async () => {
       try {
         const [admin, usersData, formsData, sessionsData] = await Promise.all([

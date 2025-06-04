@@ -7,13 +7,14 @@ import conf from "../conf/conf";
 
 
 const ApplicantDetails = () => {
+    const { forms, getForms,dateFilter, setDateFilter } = useContext(AppContext);
+
   const [loader, setLoader] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [filter, setFilter] = useState("thisMonth");
+  const [filter, setFilter] = useState(dateFilter);
   const limit = conf.appwriteQueryLimit;
 
-  const { forms, getForms, setDateFilter } = useContext(AppContext);
 
   useEffect(() => {
     setLoader(true)

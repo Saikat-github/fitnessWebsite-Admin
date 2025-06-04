@@ -3,13 +3,14 @@ import { Search } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AppContext } from "../context/AppContext";
 import { converDate } from "../utils/ConverDate";
+import conf from "../conf/conf";
 
 
 
 const AllUsers = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const limit = 12;
+  const limit = conf.appwriteQueryLimit;
 
   const { users, getUsers } = useContext(AppContext);
 
@@ -25,8 +26,6 @@ const AllUsers = () => {
     user.name.toLowerCase().includes(search.toLowerCase()) ||
     user.email.toLowerCase().includes(search.toLowerCase())
   );
-
-
 
 
   return (
@@ -85,8 +84,9 @@ const AllUsers = () => {
         <span> Page {page} </span>
         <button
           className="flex items-center px-3 py-1 bg-slate-700 text-slate-100 rounded-full cursor-pointer"
+          onClick={() => setPage(page + 1)}
           disabled={users.length < limit}
-          onClick={() => setPage(page + 1)}>
+        >
           Next<ChevronRight />
         </button>
       </div>
